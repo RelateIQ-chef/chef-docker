@@ -313,6 +313,9 @@ docker_installation_package 'default' do
   version '1.8.3'
   action :create
   package_options %q|--force-yes -o Dpkg::Options::='--force-confold' -o Dpkg::Options::='--force-all'| # if Ubuntu for example
+  package_properties {
+    'retries' => 3
+  }
 end
 ```
 
@@ -324,6 +327,7 @@ end
   'docker-engine'
 - `package_options` - Manually specify additional options, like
   apt-get directives for example
+- `package_properties` - Manually specify additional properties when installing Docker using the Chef `package` resource
 
 ## docker_service_manager
 

@@ -27,6 +27,7 @@ module DockerCookbook
     # binary, package and tarball
     property :version, String, desired_state: false
     property :package_options, [String, nil], desired_state: false
+    property :package_properties, Hash, desired_state: false
 
     ################
     # Helper Methods

@@ -13,10 +13,15 @@ module DockerCookbook
     property :package_version, String, default: lazy { version_string(version) }, desired_state: false
     property :version, String, default: lazy { default_docker_version }, desired_state: false
     property :package_options, String, desired_state: false
+    property :package_properties, Hash, default: {}, desired_state: false
+
 
     # Actions
     action :create do
       package new_resource.package_name do
+        new_resource.package_properties.each do |key, value|
+          send(key, value) unless value.nil?
+        end
         version new_resource.package_version
         options new_resource.package_options
         action :install
